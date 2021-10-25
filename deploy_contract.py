@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-from web3 import Web3
+from web3 import Web3 # docs: https://web3py.readthedocs.io/en/stable/contracts.html?highlight=eth.contract#web3.contract.Contract.constructor
 
 load_dotenv()
 node_provider     = os.environ['NODE_PROVIDER_LOCAL']
@@ -25,6 +25,7 @@ def deploy_contract(cost, owner, signature):
     deployment         = icw.constructor(owner).buildTransaction(transaction_body)
     signed_transaction = web3_connection.eth.account.sign_transaction(deployment, signature)
     result             = web3_connection.eth.sendRawTransaction(signed_transaction.rawTransaction)
+    print(bytes(result).hex())
     return result
 
 if __name__ == "__main__":

@@ -30,11 +30,11 @@ def invest(investor, wallet, amount, signature):
     function_call      = icw.functions.invest(web3_connection.toWei(amount, 'ether')).buildTransaction(transaction_body)
     signed_transaction = web3_connection.eth.account.sign_transaction(function_call, signature)
     result             = web3_connection.eth.sendRawTransaction(signed_transaction.rawTransaction)
-    print(result)
+    print(bytes(result).hex())
     return result
 
 
 if __name__ == "__main__":
     are_we_connected()
-    # invest(os.environ['ADDRESS_INVESTOR'], os.environ['ADDRESS_WALLET'], 50, os.environ['PRIVATE_KEY_INVESTOR'])
-    invest('0x09dcE5eBf7A549c69e5d36349fcceE1d0E1e9888', os.environ['ADDRESS_WALLET'], 50, '59bc9785fc4801625895c29893dcf8ed009aa068ff3931322be9dca7eeef90ca')
+    invest(os.environ['ADDRESS_INVESTOR'], os.environ['ADDRESS_WALLET'], 10, os.environ['PRIVATE_KEY_INVESTOR']) #success
+    # invest(os.environ['ADDRESS_INVESTOR'], os.environ['ADDRESS_WALLET'], 100, os.environ['PRIVATE_KEY_INVESTOR'])  #fail
