@@ -20,6 +20,7 @@ def deploy_contract(cost, owner, signature):
     transaction_body = {
         'nonce': get_nonce(owner),
         'gasPrice': icw.web3.eth.gas_price(),
+        # 'gasPrice': web3_connection.toWei(cost, 'ether')
     }
 
     deployment         = icw.constructor(owner).buildTransaction(transaction_body)
@@ -30,4 +31,4 @@ def deploy_contract(cost, owner, signature):
 
 if __name__ == "__main__":
     are_we_connected()
-    deploy_contract(1, os.environ['ADDRESS_WALLET'], os.environ['PRIVATE_KEY_WALLET'])
+    deploy_contract(10, os.environ['ADDRESS_WALLET'], os.environ['PRIVATE_KEY_WALLET'])
