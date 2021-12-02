@@ -35,13 +35,13 @@ def test_invest(investor, wallet, amount, signature):
     #unsuccessful transaction
     assert mock_invest() == False, "Transaction succeeded"
 
-def test_disperse(wallet, homeowner, amount, signature):
+def test_disperse(wallet, project_participant, amount, signature):
     #valid parameter tests
     assert valid_eth_address(wallet)    == True, "Invalid parameter ('wallet' should be an address string)"
-    assert valid_eth_address(homeowner) == True, "Invalid parameter ('homeowner' should be an address string)"
+    assert valid_eth_address(project_participant) == True, "Invalid parameter ('project_participant' should be an address string)"
     assert valid_amount(amount)         == True, "Invalid parameter ('amount' should be a nonnegative number)"
     assert valid_signature(signature)   == True, "Invalid parameter ('signature' should be a valid private key string)"
-    assert wallet != homeowner, "The 'wallet' and 'homeowner' addresses should not be the same"
+    assert wallet != project_participant, "The 'wallet' and 'project_participant' addresses should not be the same"
 
     mock_disperse = mock.Mock(side_effect=[True, False])
 
@@ -55,6 +55,6 @@ if __name__ == "__main__":
     start = time.time()
     test_are_we_connected()
     test_invest("0xaValidInvestorAddy", "0xaValidWalletAddy", 50, "privateKeyOfInvestor")
-    test_disperse("0xaValidWalletAddy", "0xaValidHomeownerAddy", 10, "privateKeyOfWallet")
+    test_disperse("0xaValidWalletAddy", "0xaValidProjectParticipantAddy", 10, "privateKeyOfWallet")
     end = time.time()
     print(f"All tests have run successfully (ran in {end-start: .3f} seconds)", flush=True)
